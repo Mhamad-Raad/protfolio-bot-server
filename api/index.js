@@ -1,15 +1,12 @@
-import express from 'express';
-import cors from 'cors';
-import { Client } from '@gradio/client';
+const express = require('express');
+const cors = require('cors');
+const { Client } = await import('@gradio/client');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(cors({ origin: '*' }));
-
 app.use(express.json());
-
-app.get('/', (req, res) => res.send('Welcome to the Chatbot API!'));
 
 app.post('/api/chat', async (req, res) => {
   const { message } = req.body;
