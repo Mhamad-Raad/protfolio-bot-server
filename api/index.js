@@ -9,6 +9,8 @@ app.use(cors({ origin: '*' }));
 
 app.use(express.json());
 
+app.get('/', (req, res) => res.send('Welcome to the Chatbot API!'));
+
 app.post('/api/chat', async (req, res) => {
   const { message } = req.body;
 
