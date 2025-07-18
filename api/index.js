@@ -1,6 +1,5 @@
 const express = require('express');
 const cors = require('cors');
-const { Client } = await import('@gradio/client');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -12,6 +11,7 @@ app.post('/api/chat', async (req, res) => {
   const { message } = req.body;
 
   try {
+    const { Client } = await import('@gradio/client');
     const client = await Client.connect('mhamad69/Portfolio-Chat-Bot');
     const result = await client.predict('/chat', {
       message,
