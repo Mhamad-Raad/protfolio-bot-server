@@ -11,8 +11,7 @@
   "dependencies": {
     "@gradio/client": "^1.15.5",
     "cors": "^2.8.5",
-    "express": "^5.1.0",
-    "serverless-http": "^3.2.0"
+    "express": "^5.1.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.10"
@@ -21,3 +20,4 @@
   "author": "",
   "license": "ISC"
 }
+
