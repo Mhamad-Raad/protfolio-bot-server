@@ -4,16 +4,25 @@ const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(cors({ origin: '*' }));
+app.use(
+  cors({
+    origin: '*',
+    methods: ['GET', 'POST', 'OPTIONS'],
+    allowedHeaders: ['Content-Type'],
+  })
+);
+
 app.use(express.json());
 
-app.get('/', (req, res) => res.send('Welcome to the API!'));
+app.options('*', cors());
+
+app.get('/', (req, res) => res.send('Welcome to the Portfolio Chat Bot API!'));
 
 app.post('/api/chat', async (req, res) => {
-  const { message } = req.body;
-
   try {
     const { Client } = await import('@gradio/client');
+    const { message } = req.body;
+
     const client = await Client.connect('mhamad69/Portfolio-Chat-Bot');
     const result = await client.predict('/chat', {
       message,
@@ -25,7 +34,9 @@ app.post('/api/chat', async (req, res) => {
     res.json({ reply: result.data });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Failed to contact chatbot' });
+    res
+      .status(500)
+      .json({ error: 'Server error while contacting Gradio client' });
   }
 });
 
